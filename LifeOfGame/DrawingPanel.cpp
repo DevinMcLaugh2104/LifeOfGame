@@ -13,8 +13,13 @@ void DrawingPanel::OnPaint(wxPaintEvent& event)
 {
 	wxAutoBufferedPaintDC dc(this);
 	dc.Clear();
+
 	DPptr = wxGraphicsContext::Create(dc);
 	if (!DPptr) { return; }
+
+	wxSize panelSize = GetSize();
+	int width = panelSize.GetWidth() / gridSize;
+	int height = panelSize.GetHeight() / gridSize;
 
 	DPptr->SetPen(*wxBLACK);
 	DPptr->SetBrush(*wxWHITE);
@@ -23,8 +28,7 @@ void DrawingPanel::OnPaint(wxPaintEvent& event)
 	{
 		for (int j = 0; j < gridSize; j++)
 		{
-			DPptr->DrawRectangle(i*10, j*10, 10, 10);
+			DPptr->DrawRectangle(i * width, j * height, width, height);
 		}
 	}
-	
 }
