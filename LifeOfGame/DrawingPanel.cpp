@@ -1,6 +1,6 @@
 #include "DrawingPanel.h"
 
-DrawingPanel::DrawingPanel(wxWindow* parent) : wxPanel(parent, wxID_ANY, wxPoint(0, 0), wxSize(200, 200))
+DrawingPanel::DrawingPanel(wxWindow* parent) : wxPanel(parent, wxID_ANY, wxPoint(0, 0), wxSize(200, 200))		//drawing panel constructor
 {
 	this->SetBackgroundStyle(wxBG_STYLE_PAINT);
 	this->Bind(wxEVT_PAINT, &DrawingPanel::OnPaint, this);
@@ -18,5 +18,13 @@ void DrawingPanel::OnPaint(wxPaintEvent& event)
 
 	DPptr->SetPen(*wxBLACK);
 	DPptr->SetBrush(*wxWHITE);
-	DPptr->DrawRectangle(0, 0, 10, 10);
+
+	for (int i = 0; i < gridSize; i++)
+	{
+		for (int j = 0; j < gridSize; j++)
+		{
+			DPptr->DrawRectangle(i*10, j*10, 10, 10);
+		}
+	}
+	
 }
