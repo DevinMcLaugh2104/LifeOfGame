@@ -9,8 +9,9 @@ private:
    
 public:
     
-    DrawingPanel* drawingPanel;
+    DrawingPanel* drawingPanel = nullptr;
     MainWindow();
     ~MainWindow();
+    void WindowResize(wxSizeEvent& event);
 };
 

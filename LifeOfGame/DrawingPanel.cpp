@@ -32,3 +32,8 @@ void DrawingPanel::OnPaint(wxPaintEvent& event)
 		}
 	}
 }
+void DrawingPanel::SetSize(wxSize& param)
+{
+	wxPanel::SetSize(param);
+	Refresh();
+}

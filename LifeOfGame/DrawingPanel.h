@@ -9,15 +9,16 @@ class DrawingPanel :        //panel for storing cells
 private:
 
     int gridSize = 15;      //grid size variable
-    int gridWidth;          //width and height variables
-    int gridHeight;
+    int gridWidth = 0;          //width and height variables
+    int gridHeight = 0;
 
 public:
 
-    wxGraphicsContext* DPptr;       //object used for cell grid
+    wxGraphicsContext* DPptr = nullptr;       //object used for cell grid
 
     DrawingPanel(wxWindow* parent);
     ~DrawingPanel();
     void OnPaint(wxPaintEvent& event);
+    void SetSize(wxSize& param);
 };
 
