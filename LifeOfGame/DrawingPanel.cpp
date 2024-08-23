@@ -1,6 +1,6 @@
 #include "DrawingPanel.h"
 
-DrawingPanel::DrawingPanel(wxWindow* parent, std::vector<std::vector<bool>>& param) : wxPanel(parent, wxID_ANY, wxPoint(0, 0), wxSize(200, 200)), rGameBoard(param)		//drawing panel constructor
+DrawingPanel::DrawingPanel(wxWindow* parent, std::vector<std::vector<bool>>& param) : wxPanel(parent, wxID_ANY, wxPoint(0, 0), wxSize(200, 200)), rGameBoard(param)		
 {
 	this->SetBackgroundStyle(wxBG_STYLE_PAINT);
 	this->Bind(wxEVT_PAINT, &DrawingPanel::OnPaint, this);
@@ -23,13 +23,21 @@ void DrawingPanel::OnPaint(wxPaintEvent& event)
 	int height = panelSize.GetHeight() / gridSize;
 
 	DPptr->SetPen(*wxBLACK);
-	DPptr->SetBrush(*wxWHITE);
-
+	
 	for (int i = 0; i < gridSize; i++)
 	{
 		for (int j = 0; j < gridSize; j++)
 		{
-			DPptr->DrawRectangle(i * width, j * height, width, height);
+			if (rGameBoard[i][j] == true)
+			{
+				DPptr->SetBrush(*wxLIGHT_GREY);
+				DPptr->DrawRectangle(i * width, j * height, width, height);
+			}
+			else
+			{
+				DPptr->SetBrush(*wxWHITE);
+				DPptr->DrawRectangle(i * width, j * height, width, height);
+			}
 		}
 	}
 }
@@ -63,5 +71,4 @@ void DrawingPanel::OnMouseEvent(wxMouseEvent& event)
 	}
 
 	Refresh();
-
 }
