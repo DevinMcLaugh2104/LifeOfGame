@@ -16,7 +16,7 @@ void MainWindow::WindowResize(wxSizeEvent& event)
 	drawingPanel->SetSize(windowSize);
 	event.Skip();
 }
-void MainWindow::InitializeGrid(std::vector<std::vector<bool>> param)
+void MainWindow::InitializeGrid(std::vector<std::vector<bool>>& param)
 {
 	param.resize(gSize);
 
