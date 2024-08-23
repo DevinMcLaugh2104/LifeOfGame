@@ -37,3 +37,7 @@ void DrawingPanel::SetSize(wxSize& param)
 	wxPanel::SetSize(param);
 	Refresh();
 }
+void DrawingPanel::SetGridSize(size_t param)
+{
+	gridSize = param;
+}

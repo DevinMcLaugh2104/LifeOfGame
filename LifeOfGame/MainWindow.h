@@ -10,8 +10,11 @@ private:
 public:
     
     DrawingPanel* drawingPanel = nullptr;
+    std::vector<std::vector<bool>> gameBoard;
+    size_t gSize = 15;
     MainWindow();
     ~MainWindow();
     void WindowResize(wxSizeEvent& event);
+    void InitializeGrid(std::vector<std::vector<bool>> param);
 };
 
