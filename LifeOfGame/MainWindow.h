@@ -8,7 +8,7 @@ class MainWindow :      //Frame for holding application
 private:
    
 public:
-    
+    int testVariable = 0;
     DrawingPanel* drawingPanel = nullptr;
     std::vector<std::vector<bool>> gameBoard;
     size_t gSize = 15;
