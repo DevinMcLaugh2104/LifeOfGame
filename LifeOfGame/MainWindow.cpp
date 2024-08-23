@@ -2,7 +2,7 @@
 
 MainWindow::MainWindow() : wxFrame(nullptr, wxID_ANY, "Game of Life", wxPoint(0, 0), wxSize(200, 200))		//frame constructor
 {
-	drawingPanel = new DrawingPanel(this);
+	drawingPanel = new DrawingPanel(this, gameBoard);
 	this->Bind(wxEVT_SIZE, &MainWindow::WindowResize, this);
 	InitializeGrid(gameBoard);
 }
@@ -16,7 +16,7 @@ void MainWindow::WindowResize(wxSizeEvent& event)
 	drawingPanel->SetSize(windowSize);
 	event.Skip();
 }
-void MainWindow::InitializeGrid(std::vector<std::vector<bool>> param)
+void MainWindow::InitializeGrid(std::vector<std::vector<bool>>& param)
 {
 	param.resize(gSize);
 

@@ -1,9 +1,10 @@
 #include "DrawingPanel.h"
 
-DrawingPanel::DrawingPanel(wxWindow* parent) : wxPanel(parent, wxID_ANY, wxPoint(0, 0), wxSize(200, 200))		//drawing panel constructor
+DrawingPanel::DrawingPanel(wxWindow* parent, std::vector<std::vector<bool>>& param) : wxPanel(parent, wxID_ANY, wxPoint(0, 0), wxSize(200, 200)), rGameBoard(param)		//drawing panel constructor
 {
 	this->SetBackgroundStyle(wxBG_STYLE_PAINT);
 	this->Bind(wxEVT_PAINT, &DrawingPanel::OnPaint, this);
+	this->Bind(wxEVT_LEFT_UP, &DrawingPanel::OnMouseEvent, this);
 }
 DrawingPanel::~DrawingPanel()
 {
@@ -40,4 +41,27 @@ void DrawingPanel::SetSize(wxSize& param)
 void DrawingPanel::SetGridSize(size_t param)
 {
 	gridSize = param;
+}
+void DrawingPanel::OnMouseEvent(wxMouseEvent& event)
+{
+	size_t x = event.GetX();
+	size_t y = event.GetY();
+	wxSize panelSize = GetSize();
+	size_t cellWidth = panelSize.GetWidth();
+	size_t cellHeight = panelSize.GetHeight();
+
+	size_t pointX = x / cellWidth;
+	size_t pointY = y / cellHeight;
+
+	if (rGameBoard[pointX][pointY] == false)
+	{
+		rGameBoard[pointX][pointY] == true;
+	}
+	else
+	{
+		rGameBoard[pointX][pointY] == false;
+	}
+
+	Refresh();
+
 }

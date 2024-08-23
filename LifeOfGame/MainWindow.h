@@ -15,6 +15,6 @@ public:
     MainWindow();
     ~MainWindow();
     void WindowResize(wxSizeEvent& event);
-    void InitializeGrid(std::vector<std::vector<bool>> param);
+    void InitializeGrid(std::vector<std::vector<bool>>& param);
 };
 

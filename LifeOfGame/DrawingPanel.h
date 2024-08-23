@@ -3,22 +3,24 @@
 #include "wx/graphics.h"
 #include "wx/dcbuffer.h"
 
-class DrawingPanel :        //panel for storing cells
+class DrawingPanel :        
     public wxPanel
 {
 private:
 
-    int gridWidth{};          //width and height variables
+    int gridWidth{};         
     int gridHeight{};
 
 public:
 
-    size_t gridSize = 15;                        //grid size variable
-    wxGraphicsContext* DPptr = nullptr;       //object used for cell grid
-    DrawingPanel(wxWindow* parent);
+    size_t gridSize = 15;                       
+    wxGraphicsContext* DPptr = nullptr;      
+    std::vector<std::vector<bool>>& rGameBoard;
+    DrawingPanel(wxWindow* parent, std::vector<std::vector<bool>>& param);
     ~DrawingPanel();
     void OnPaint(wxPaintEvent& event);
     void SetSize(wxSize& param);
     void SetGridSize(size_t param);
+    void OnMouseEvent(wxMouseEvent& event);
 };
 
