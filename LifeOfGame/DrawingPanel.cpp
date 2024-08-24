@@ -19,8 +19,8 @@ void DrawingPanel::OnPaint(wxPaintEvent& event)
 	if (!DPptr) { return; }
 
 	wxSize panelSize = GetSize();
-	int width = panelSize.GetWidth() / gridSize;
-	int height = panelSize.GetHeight() / gridSize;
+	size_t width = panelSize.GetWidth() / gridSize;
+	size_t height = panelSize.GetHeight() / gridSize;
 
 	DPptr->SetPen(*wxBLACK);
 	
@@ -55,19 +55,16 @@ void DrawingPanel::OnMouseEvent(wxMouseEvent& event)
 	size_t x = event.GetX();
 	size_t y = event.GetY();
 	wxSize panelSize = GetSize();
-	size_t cellWidth = panelSize.GetWidth();
-	size_t cellHeight = panelSize.GetHeight();
-
-	size_t pointX = x / cellWidth;
-	size_t pointY = y / cellHeight;
+	size_t pointX = x * gridSize / panelSize.GetWidth();
+	size_t pointY = y * gridSize / panelSize.GetHeight();
 
 	if (rGameBoard[pointX][pointY] == false)
 	{
-		rGameBoard[pointX][pointY] == true;
+		rGameBoard[pointX][pointY] = true;
 	}
 	else
 	{
-		rGameBoard[pointX][pointY] == false;
+		rGameBoard[pointX][pointY] = false;
 	}
 
 	Refresh();
