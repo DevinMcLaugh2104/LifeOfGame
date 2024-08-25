@@ -6,8 +6,12 @@ wxEND_EVENT_TABLE()
 
 MainWindow::MainWindow() : wxFrame(nullptr, wxID_ANY, "Game of Life", wxPoint(0, 0), wxSize(200, 200))		//frame constructor
 {
+	statusBar = CreateStatusBar(2);
+	statusBar->SetStatusText("Generations: ", 0);
+	statusBar->SetStatusText("Living Cell: ", 1);
 	drawingPanel = new DrawingPanel(this, gameBoard);
 	InitializeGrid(gameBoard);
+	this->Layout();
 }
 MainWindow::~MainWindow()
 {

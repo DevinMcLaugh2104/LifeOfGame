@@ -18,6 +18,7 @@ public:
     size_t gridSize = 15;                       
     wxGraphicsContext* DPptr = nullptr;      
     std::vector<std::vector<bool>>& rGameBoard;
+
     DrawingPanel(wxWindow* parent, std::vector<std::vector<bool>>& param);
     ~DrawingPanel();
     void OnPaint(wxPaintEvent& event);

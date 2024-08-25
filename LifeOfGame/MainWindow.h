@@ -8,12 +8,16 @@ class MainWindow :      //Frame for holding application
     public wxFrame
 {
 private:
-   
-public:
+    size_t generations{};
+    size_t livingCells{};
 
+public:
+    wxStatusBar* statusBar;
     DrawingPanel* drawingPanel = nullptr;
     std::vector<std::vector<bool>> gameBoard;
     size_t gSize = 15;
+    
+
     MainWindow();
     ~MainWindow();
     void WindowResize(wxSizeEvent& event);

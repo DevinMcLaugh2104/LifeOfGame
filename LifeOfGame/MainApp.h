@@ -9,7 +9,8 @@ private:
 
 public:
 
-    MainWindow* mainWindow;     //main window object for frame
+    MainWindow* mainWindow;  //main window object for frame
+
     MainApp();
     ~MainApp();
     virtual bool OnInit();
