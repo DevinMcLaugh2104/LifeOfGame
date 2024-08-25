@@ -40,6 +40,7 @@ public:
     void OnPause(wxCommandEvent& event);
     void OnNext(wxCommandEvent& event);
     void OnTrash(wxCommandEvent& event);
+    size_t NeighborCount(size_t row, size_t column);
     wxDECLARE_EVENT_TABLE();
 };
 

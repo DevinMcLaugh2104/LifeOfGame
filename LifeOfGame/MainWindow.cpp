@@ -77,3 +77,37 @@ void MainWindow::OnTrash(wxCommandEvent& event)
 {
 
 }
+size_t MainWindow::NeighborCount(size_t row, size_t column)
+{
+	size_t count = 0;
+
+	for (int i = -1; i < 2; i++)
+	{
+		for (int j = -1; j < 2; j++)
+		{
+			size_t cellCol = column + i;
+			size_t cellRow = row + j;
+
+			if (i == 0 && j == 0)
+			{
+				continue;
+			}
+
+			if (cellCol == -1 || cellRow == -1)
+			{
+				continue;
+			}
+
+			if (cellCol >= gSize || cellRow >= gSize)
+			{
+				continue;
+			}
+
+			if (gameBoard[cellCol][cellRow] == true)
+			{
+				count++;
+			}
+		}
+	}
+	return count;
+}
