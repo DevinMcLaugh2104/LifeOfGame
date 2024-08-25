@@ -3,6 +3,8 @@
 #include "wx/graphics.h"
 #include "wx/dcbuffer.h"
 
+
+
 class DrawingPanel :        
     public wxPanel
 {
@@ -22,5 +24,6 @@ public:
     void SetSize(wxSize& param);
     void SetGridSize(size_t param);
     void OnMouseEvent(wxMouseEvent& event);
+    wxDECLARE_EVENT_TABLE();
 };
 

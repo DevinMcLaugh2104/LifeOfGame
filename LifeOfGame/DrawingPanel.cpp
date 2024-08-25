@@ -1,10 +1,13 @@
 #include "DrawingPanel.h"
 
+wxBEGIN_EVENT_TABLE(DrawingPanel, wxPanel)
+EVT_PAINT(DrawingPanel::OnPaint)
+EVT_LEFT_UP(DrawingPanel::OnMouseEvent)
+wxEND_EVENT_TABLE()
+
 DrawingPanel::DrawingPanel(wxWindow* parent, std::vector<std::vector<bool>>& param) : wxPanel(parent, wxID_ANY, wxPoint(0, 0), wxSize(200, 200)), rGameBoard(param)		
 {
 	this->SetBackgroundStyle(wxBG_STYLE_PAINT);
-	this->Bind(wxEVT_PAINT, &DrawingPanel::OnPaint, this);
-	this->Bind(wxEVT_LEFT_UP, &DrawingPanel::OnMouseEvent, this);
 }
 DrawingPanel::~DrawingPanel()
 {

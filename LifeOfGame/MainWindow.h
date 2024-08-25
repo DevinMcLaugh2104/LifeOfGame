@@ -2,6 +2,8 @@
 #include "wx/wx.h"
 #include "DrawingPanel.h"
 
+
+
 class MainWindow :      //Frame for holding application
     public wxFrame
 {
@@ -16,5 +18,6 @@ public:
     ~MainWindow();
     void WindowResize(wxSizeEvent& event);
     void InitializeGrid(std::vector<std::vector<bool>>& param);
+    wxDECLARE_EVENT_TABLE();
 };
 
