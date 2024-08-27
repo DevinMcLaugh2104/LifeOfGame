@@ -6,6 +6,7 @@ EVT_MENU(TOOL_PLAY, MainWindow::OnPlay)
 EVT_MENU(TOOL_PAUSE, MainWindow::OnPause)
 EVT_MENU(TOOL_NEXT, MainWindow::OnNext)
 EVT_MENU(TOOL_TRASH, MainWindow::OnTrash)
+EVT_TIMER(FUNC_TIMER, MainWindow::Timer)
 wxEND_EVENT_TABLE()
 
 MainWindow::MainWindow() : wxFrame(nullptr, wxID_ANY, "Game of Life", wxPoint(0, 0), wxSize(200, 200))		
@@ -15,6 +16,7 @@ MainWindow::MainWindow() : wxFrame(nullptr, wxID_ANY, "Game of Life", wxPoint(0,
 	drawingPanel->SetGridSize(gSize);
 	InitializeStatusBar();
 	InitializeToolBar();
+	timer = new wxTimer(this, FUNC_TIMER);
 	this->Layout();
 }
 MainWindow::~MainWindow()
@@ -67,11 +69,11 @@ void MainWindow::InitializeToolBar()
 }
 void MainWindow::OnPlay(wxCommandEvent& event)
 {
-
+	timer->Start(timerVar);
 }
 void MainWindow::OnPause(wxCommandEvent& event)
 {
-
+	timer->Stop();
 }
 void MainWindow::OnNext(wxCommandEvent& event)
 {
@@ -79,13 +81,14 @@ void MainWindow::OnNext(wxCommandEvent& event)
 }
 void MainWindow::OnTrash(wxCommandEvent& event)
 {	
+	timer->Stop();
 	gameBoard.clear();
 	InitializeGrid(gameBoard);
 	generations = 0;
 	UpdateStatusBar();
 	Refresh();
 }
-size_t MainWindow::Neighbors(size_t row, size_t column)
+size_t MainWindow::Neighbors(size_t column, size_t row)
 {
 	size_t count = 0;
 
@@ -166,10 +169,14 @@ void MainWindow::LivingCellCount()
 		{
 			if (gameBoard[i][j] == true)
 			{
-				livingCells++;
+				cells++;
 			}
 		}
 	}
 
 	livingCells = cells;
+}
+void MainWindow::Timer(wxTimerEvent& event)
+{
+	NextGeneration();
 }
