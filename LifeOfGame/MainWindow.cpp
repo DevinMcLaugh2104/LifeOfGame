@@ -12,6 +12,7 @@ MainWindow::MainWindow() : wxFrame(nullptr, wxID_ANY, "Game of Life", wxPoint(0,
 {
 	drawingPanel = new DrawingPanel(this, gameBoard);
 	InitializeGrid(gameBoard);
+	drawingPanel->SetGridSize(gSize);
 	InitializeStatusBar();
 	InitializeToolBar();
 	this->Layout();
@@ -34,14 +35,17 @@ void MainWindow::InitializeGrid(std::vector<std::vector<bool>>& param)
 	{
 		param[i].resize(gSize);
 	}
-
-	drawingPanel->SetGridSize(gSize);
 }
 void MainWindow::InitializeStatusBar()
 {
-	statusBar = CreateStatusBar(2);
-	statusBar->SetStatusText("Generations: ", 0);
-	statusBar->SetStatusText("Living Cell: ", 1);
+	statusBar = CreateStatusBar();
+	UpdateStatusBar();
+}
+void MainWindow::UpdateStatusBar()
+{
+	LivingCellCount();
+	std::string barInfo = "Generation: " + std::to_string(generations) + "\tLiving Cells: " + std::to_string(livingCells);
+	statusBar->SetStatusText(barInfo);
 }
 void MainWindow::InitializeToolBar()
 {
@@ -71,13 +75,17 @@ void MainWindow::OnPause(wxCommandEvent& event)
 }
 void MainWindow::OnNext(wxCommandEvent& event)
 {
-
+	NextGeneration();
 }
 void MainWindow::OnTrash(wxCommandEvent& event)
-{
-
+{	
+	gameBoard.clear();
+	InitializeGrid(gameBoard);
+	generations = 0;
+	UpdateStatusBar();
+	Refresh();
 }
-size_t MainWindow::NeighborCount(size_t row, size_t column)
+size_t MainWindow::Neighbors(size_t row, size_t column)
 {
 	size_t count = 0;
 
@@ -109,5 +117,59 @@ size_t MainWindow::NeighborCount(size_t row, size_t column)
 			}
 		}
 	}
+
 	return count;
+}
+void MainWindow::NextGeneration()
+{
+	InitializeGrid(sandBox);
+
+	for (int i = 0; i < sandBox.size(); i++)
+	{
+		for (int j = 0; j < sandBox[i].size(); j++)
+		{
+			int neighborCount = Neighbors(i, j);
+
+			if (gameBoard[i][j] == true && neighborCount < 2)
+			{
+				sandBox[i][j] = false;
+			}
+			if (gameBoard[i][j] == true && neighborCount > 3)
+			{
+				sandBox[i][j] = false;
+			}
+			if (gameBoard[i][j] == true && (neighborCount == 2 || neighborCount == 3))
+			{
+				sandBox[i][j] = true;
+			}
+			if (gameBoard[i][j] == false && neighborCount == 3)
+			{
+				sandBox[i][j] = true;
+			}
+		}
+	}
+
+	gameBoard.swap(sandBox);
+	sandBox.clear();
+	generations++;
+	LivingCellCount();
+	UpdateStatusBar();
+	Refresh();
+}
+void MainWindow::LivingCellCount()
+{
+	size_t cells{};
+
+	for (int i = 0; i < gameBoard.size(); i++)
+	{
+		for (int j = 0; j < gameBoard[i].size(); j++)
+		{
+			if (gameBoard[i][j] == true)
+			{
+				livingCells++;
+			}
+		}
+	}
+
+	livingCells = cells;
 }
