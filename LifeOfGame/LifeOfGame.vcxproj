@@ -130,6 +130,7 @@
     <ClInclude Include="DrawingPanel.h" />
     <ClInclude Include="MainApp.h" />
     <ClInclude Include="MainWindow.h" />
+    <ClInclude Include="Settings.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DrawingPanel.cpp" />

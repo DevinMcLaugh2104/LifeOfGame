@@ -1,6 +1,7 @@
 #pragma once
 #include "wx/wx.h"
 #include "DrawingPanel.h"
+#include "settings.h"
 #include "play.xpm"
 #include "pause.xpm"
 #include "next.xpm"
@@ -15,25 +16,23 @@ enum IDs
     FUNC_TIMER = 1400, 
 };
 
-class MainWindow :      //Frame for holding application
+class MainWindow :      
     public wxFrame
 {
 private:
     size_t generations{};
     size_t livingCells{};
-    int timerVar = 50;
+    Settings settings;
 
 public:
 
     DrawingPanel* drawingPanel = nullptr;
     std::vector<std::vector<bool>> gameBoard;
     std::vector<std::vector<bool>> sandBox;
-    size_t gSize = 15;
     wxStatusBar* statusBar;
     wxToolBar* toolBar;
     wxTimer* timer;
     
-
     MainWindow();
     ~MainWindow();
 

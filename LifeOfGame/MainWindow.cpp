@@ -11,9 +11,9 @@ wxEND_EVENT_TABLE()
 
 MainWindow::MainWindow() : wxFrame(nullptr, wxID_ANY, "Game of Life", wxPoint(0, 0), wxSize(200, 200))		
 {
-	drawingPanel = new DrawingPanel(this, gameBoard);
+	drawingPanel = new DrawingPanel(this, gameBoard, &settings);
 	InitializeGrid(gameBoard);
-	drawingPanel->SetGridSize(gSize);
+	drawingPanel->SetGridSize(settings.gridSize);
 	InitializeStatusBar();
 	InitializeToolBar();
 	timer = new wxTimer(this, FUNC_TIMER);
@@ -31,11 +31,11 @@ void MainWindow::WindowResize(wxSizeEvent& event)
 }
 void MainWindow::InitializeGrid(std::vector<std::vector<bool>>& param)
 {
-	param.resize(gSize);
+	param.resize(settings.gridSize);
 
 	for (int i = 0; i < param.size(); i++)
 	{
-		param[i].resize(gSize);
+		param[i].resize(settings.gridSize);
 	}
 }
 void MainWindow::InitializeStatusBar()
@@ -69,7 +69,7 @@ void MainWindow::InitializeToolBar()
 }
 void MainWindow::OnPlay(wxCommandEvent& event)
 {
-	timer->Start(timerVar);
+	timer->Start(settings.timerVar);
 }
 void MainWindow::OnPause(wxCommandEvent& event)
 {
@@ -109,7 +109,7 @@ size_t MainWindow::Neighbors(size_t column, size_t row)
 				continue;
 			}
 
-			if (cellCol >= gSize || cellRow >= gSize)
+			if (cellCol >= settings.gridSize || cellRow >= settings.gridSize)
 			{
 				continue;
 			}
