@@ -1,5 +1,10 @@
 #include "SettingsDialog.h"
 
+wxBEGIN_EVENT_TABLE(SettingsDialog, wxDialog)
+EVT_BUTTON(wxID_OK, SettingsDialog::OnOk)
+EVT_BUTTON(wxID_CANCEL, SettingsDialog::OnCancel)
+wxEND_EVENT_TABLE()
+
 SettingsDialog::SettingsDialog(wxWindow* window) : wxDialog(window, wxID_ANY, "Settings")
 {
 	mainBox = new wxBoxSizer(wxVERTICAL);
@@ -24,5 +29,12 @@ SettingsDialog::SettingsDialog(wxWindow* window) : wxDialog(window, wxID_ANY, "S
 
 	mainBox->Add(child1);
 	mainBox->Add(child2);
-	
+}
+void SettingsDialog::OnOk(wxCommandEvent& event)
+{
+	EndModal(wxID_OK);
+}
+void SettingsDialog::OnCancel(wxCommandEvent& event)
+{
+	EndModal(wxID_CANCEL);
 }

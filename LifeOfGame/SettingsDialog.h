@@ -2,6 +2,7 @@
 #include "wx/wx.h"
 #include "wx/spinctrl.h"
 #include "wx/clrpicker.h"
+#include "Settings.h"
 
 enum IDs
 {
@@ -26,6 +27,9 @@ public:
     wxSizer* okCancel;
 
     SettingsDialog(wxWindow* window);
+    void OnOk(wxCommandEvent& event);
+    void OnCancel(wxCommandEvent& event);
+    wxDECLARE_EVENT_TABLE();
 };
 
 
